@@ -1,0 +1,67 @@
+{
+  "about": "Rights per user profile. Read by the FastAPI back end (fastapi_contract/permissions.py), which enforces them and returns the resolved list in GET /api/me, and by the front end in sample-data mode. Every user has one profile; roles add rights on top. A profile can extend another one. Add a permission to the catalogue before using it in a profile or role.",
+
+  "permissions": {
+    "explorer.view": "Open the Explorer and browse the Watchlist",
+    "dashboard.view": "Open the Dashboard",
+    "reports.view": "Open the Reports page (report library)",
+    "reports.quick": "Download the Comparison report (PDF / HTML) from the Explorer toolbar",
+    "reports.template.comparison": "Use the Comparison template",
+    "reports.template.factsheet": "Use the Factsheet template",
+    "reports.format.pdf": "Export reports as PDF",
+    "reports.format.html": "Export reports as HTML",
+    "reports.format.pptx": "Export reports as PowerPoint",
+    "custom.view": "See custom series in the Explorer, Dashboard and reports",
+    "custom.manage": "Create, edit, tag and delete custom series and custom series folders",
+    "import.excel": "Import Excel data for this session (Dashboard and reports)",
+    "folders.personal": "Create personal folders and sub-folders, fill them, set personal benchmarks",
+    "instruments.rename": "Set display names",
+    "watchlist.manage": "Add and remove Watchlist instruments, create and delete Watchlist folders, set Watchlist folder benchmarks",
+    "benchmarks.security": "Set an instrument's benchmark for all users",
+    "tags.manage": "Tag any security"
+  },
+
+  "profiles": {
+    "standard": {
+      "label": "Standard",
+      "description": "Explorer and the Comparison report",
+      "limits": { "selection": 6 },
+      "permissions": [
+        "explorer.view",
+        "reports.quick",
+        "reports.template.comparison",
+        "reports.format.pdf",
+        "reports.format.html"
+      ]
+    },
+    "advanced": {
+      "label": "Advanced",
+      "description": "All modules",
+      "extends": "standard",
+      "limits": { "selection": 10 },
+      "permissions": [
+        "dashboard.view",
+        "reports.view",
+        "reports.template.factsheet",
+        "reports.format.pptx",
+        "custom.view",
+        "custom.manage",
+        "import.excel",
+        "folders.personal",
+        "instruments.rename"
+      ]
+    }
+  },
+
+  "roles": {
+    "admin": {
+      "label": "Admin",
+      "description": "Maintains the Watchlist and shared benchmarks",
+      "permissions": [
+        "watchlist.manage",
+        "benchmarks.security",
+        "tags.manage"
+      ]
+    }
+  }
+}
